@@ -24,7 +24,7 @@ def print_board(board):
     line = []
     for col in range(board.num_cols, 0, -1):
       stone = board.get(gotypes.Point(row=row, col=col))
-      line.append(STONE_TO_CHAR(stone))
+      line.append(STONE_TO_CHAR[stone])
     print('%s%d %s' % (bump, row, ''.join(line)))
   print('   ' + '   '.join(COLS[:board.num_cols]))
 
