@@ -1,7 +1,7 @@
 
 import copy
-from gotypes import Player
-from gotypes import Point
+from dlgo.gotypes import Player
+from dlgo.gotypes import Point
 
 
 
