@@ -75,7 +75,7 @@ class Board():
   def _remove_string(self, string):
     for point in string.stones:
       for neighbor in point.neighbors():
-        neighbor_string = self._grid.get()
+        neighbor_string = self._grid.get(neighbor)
         if neighbor_string is None:
           continue
         if neighbor_string is not string:
@@ -109,7 +109,7 @@ class Move():
     assert (point is not None) or is_pass or is_resign
     self.point = point
     self.is_play = self.point is not None
-    self.is_pass = point
+    self.is_pass = is_pass
     self.is_resign = is_resign
 
   @classmethod
@@ -155,7 +155,7 @@ class GameState():
     return next_string.num_liberties == 0
 
   @property
-  def situationi(self):
+  def situation(self):
     return (self.next_player, self.board)
 
   def does_move_violate_ko(self, player, move):
