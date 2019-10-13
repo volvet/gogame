@@ -14,7 +14,7 @@ class Player(enum.Enum):
 
   @property
   def other(self):
-    return Player.black if self == Player.white else Player.black
+    return Player.black if self == Player.white else Player.white
 
 class Point(namedtuple('Point', 'row col')):
   def neighbors(self):

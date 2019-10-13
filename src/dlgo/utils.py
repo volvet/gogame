@@ -26,7 +26,7 @@ def print_board(board):
       stone = board.get(gotypes.Point(row=row, col=col))
       line.append(STONE_TO_CHAR[stone])
     print('%s%d %s' % (bump, row, ''.join(line)))
-  print('   ' + '   '.join(COLS[:board.num_cols]))
+  print('    ' + '  '.join(COLS[:board.num_cols]))
 
 def point_from_coords(coords):
   col = COLS.index(coords[0]) + 1
