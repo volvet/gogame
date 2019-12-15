@@ -4,14 +4,15 @@ import random
 
 from gotypes import Player, Point
 
-MAX63 = 0x7fffffffffffffff
 
-def to_python(player_state):
-    if player_state is None:
-        return 'None'
-    if player_state is Player.black:
-        return Player.black
-    return Player.white
+__all__ = [
+    'EMPTY_BOARD',
+    'generate_zobrist_hash',
+]
+
+MAX63 = 0x7fffffffffffffff
+EMPTY_BOARD = 0x0
+
 
 def generate_zobrist_hash():
     table = {}
