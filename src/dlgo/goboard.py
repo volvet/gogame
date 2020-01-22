@@ -128,7 +128,7 @@ class Board:
                     self._replace_string(neighbor_string.with_liberty(point))
             self._grid[point] = None
 
-            self._hash ^= zobrist.HASH_CODE[point, string.color]  # <3>
+            self._hash ^= self._hashTable[point, string.color]  # <3>
 # <1> This new helper method updates our Go board grid.
 # <2> Removing a string can create liberties for other strings.
 # <3> With Zobrist hashing, you need to unapply the hash for this move.
