@@ -59,12 +59,13 @@ class GoString:
 
   # tag::init_zobrist[]
 class Board:
+    hashTable = zobrist.generate_zobrist_hash()
+
     def __init__(self, num_rows, num_cols):
         self.num_rows = num_rows
         self.num_cols = num_cols
         self._grid = {}
         self._hash = zobrist.EMPTY_BOARD
-        self._hashTable = zobrist.generate_zobrist_hash()
 # end::init_zobrist[]
 
     def place_stone(self, player, point):
@@ -97,7 +98,7 @@ class Board:
         for new_string_point in new_string.stones:
             self._grid[new_string_point] = new_string
 
-        self._hash ^= self._hashTable[point, player]  # <3>
+        self._hash ^= Board.hashTable[point, player]  # <3>
 
         for other_color_string in adjacent_opposite_color:
             replacement = other_color_string.without_liberty(point)  # <4>
@@ -128,7 +129,7 @@ class Board:
                     self._replace_string(neighbor_string.with_liberty(point))
             self._grid[point] = None
 
-            self._hash ^= self._hashTable[point, string.color]  # <3>
+            self._hash ^= Board.hashTable[point, string.color]  # <3>
 # <1> This new helper method updates our Go board grid.
 # <2> Removing a string can create liberties for other strings.
 # <3> With Zobrist hashing, you need to unapply the hash for this move.
@@ -225,6 +226,10 @@ class GameState:
                 {(previous.next_player, previous.board.zobrist_hash())})
         self.last_move = move
 # end::init_state_zobrist[]
+
+    def print_previous(self):
+        for s in self.previous_states:
+            print(s)
 
     def apply_move(self, move):
         """Return the new GameState after applying the move."""

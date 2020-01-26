@@ -2,7 +2,7 @@
 
 import random
 
-from gotypes import Player, Point
+from dlgo.gotypes import Player, Point
 
 
 __all__ = [
