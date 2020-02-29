@@ -11,8 +11,8 @@ Games with two players that are zero-sum, perfect information, deterministic, de
 
 ## AI in Real Games
 * **Minimax** attempts to minimize the opponent's maximum reward at each state,  and this is the traditional search approach for two-player combinatorial games. The search is typically stopped prematurely and a value function used to estimate the outcome of the game, and the $\alpha$-$\beta$ heuristic is typically used to prune the gtree.
-* **Expectimax**
-* **Miximax**
+* **Expectimax** generalies minimax to stochastic games in which the transitions from state to state are probabilistic.
+* **Miximax** is similiar to single-player expectimax and is used primarily in games of imperfect information.
 
 
 ## Reference
