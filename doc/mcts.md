@@ -14,6 +14,12 @@ Games with two players that are zero-sum, perfect information, deterministic, de
 * **Expectimax** generalies minimax to stochastic games in which the transitions from state to state are probabilistic.
 * **Miximax** is similiar to single-player expectimax and is used primarily in games of imperfect information.
 
+## Monte Carlo Methods
+* Q-value
+$$
+Q(s, a) = \frac{1}{N(s, a)}\sum_{i=1}^{N(s)}
+$$
+
 
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
