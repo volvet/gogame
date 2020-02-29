@@ -17,7 +17,7 @@ Games with two players that are zero-sum, perfect information, deterministic, de
 ## Monte Carlo Methods
 * Q-value
 $$
-Q(s, a) = \frac{1}{N(s, a)}\sum_{i=1}^{N(s)}
+Q(s, a) = \frac{1}{N(s, a)}\sum_{i=1}^{N(s)}\Pi_i(s,a)z_i
 $$
 
 
