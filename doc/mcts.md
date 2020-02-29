@@ -6,6 +6,14 @@ A tree is built in an incremental and asymmetric manner. For each iteration of t
 
 A great benefit of MCTS is that the values of intermediate state do not have to be evauated as for depth-limited minimax search, which greatly reduce the amount of domain knowledge required. Only the value of the terminal state at the end of each simulation is required.
 
+## Combinatorial Games
+Games with two players that are zero-sum, perfect information, deterministic, decrete and sequential are described as *combinational games*.
+
+## AI in Real Games
+* **Minimax** attempts to minimize the opponent's maximum reward at each state,  and this is the traditional search approach for two-player combinatorial games. The search is typically stopped prematurely and a value function used to estimate the outcome of the game.
+* **Expectimax**
+* **Miximax**
+
 
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
