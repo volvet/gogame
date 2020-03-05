@@ -20,11 +20,8 @@ $$
 Q(s, a) = \frac{1}{N(s, a)}\sum_{i=1}^{N(s)}\Pi_i(s,a)z_i
 $$
 where $N(s, a)$ is the number of times action $a$ has been selected from state $s$.
-
       $N(s)$ is the number of times a game has been playout though state $s$.
-      
       $z_i$ is the result $i$th simulcation playout from state $s$.
-      
       $\Pi_i(s,a)$ is 1 if action $a$ is selected from the state $s$ on the $i$th simulcation from state $s$ or $0$ otherwise.
 
 ## Reference
