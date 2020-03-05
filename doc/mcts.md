@@ -31,5 +31,10 @@ $$
 R_N = \mu^*n - \mu_j \sum_{j=1}^KE[T_j(n)]
 $$
 
+* Upper Confidence Bouinds(UCB)
+$$
+UCB = \overline X_j + \sqrt{\frac{2\lnn}{n_j}
+$$
+
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
