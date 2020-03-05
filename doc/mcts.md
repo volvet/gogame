@@ -28,7 +28,7 @@ Where $N(s, a)$ is the number of times action $a$ has been selected from state $
 ## Bandit Based Methods
 * Regret
 $$
-R_N = \mu^*n - \mu_j \sum_{j=1}^K\Xi[T_j(n)]
+R_N = \mu^*n - \mu_j \sum_{j=1}^KE[T_j(n)]
 $$
 
 ## Reference
