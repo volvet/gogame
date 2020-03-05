@@ -33,7 +33,7 @@ $$
 
 * Upper Confidence Bouinds(UCB)
 $$
-UCB = \overline X_j + \sqrt{\frac{2\lnn}{n_j}
+UCB = \overline X_j + \sqrt{\frac{2\lnn}{n_j}}
 $$
 
 ## Reference
