@@ -24,5 +24,12 @@ Where $N(s, a)$ is the number of times action $a$ has been selected from state $
       $z_i$ is the result $i$th simulcation playout from state $s$.
       $\Pi_i(s,a)$ is 1 if action $a$ is selected from the state $s$ on the $i$th simulcation from state $s$ or $0$ otherwise.
 
+
+## Bandit Based Methods
+* Regret
+$$
+R_N = \mu^*n - \mu_j \sum{j=1}^K\Xi
+$$
+
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
