@@ -38,3 +38,4 @@ $$
 
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
+* https://en.wikipedia.org/wiki/Multi-armed_bandit
