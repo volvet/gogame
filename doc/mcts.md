@@ -36,6 +36,14 @@ $$
 UCB = \overline X_j + \sqrt{\frac{2\ln n}{n_j}}
 $$
 
+## Algorithm
+Four steps are applied per search iteration:
+* Selection
+Starting at the root node, a child selection policy is recursively applied to decend though the tree until the most urgent expandable node is reached. A node is expandable if it represents a non-terminal state and has unvisit children.
+* Expansion
+* Simulation
+* Backpropagation
+
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
 * https://en.wikipedia.org/wiki/Multi-armed_bandit
