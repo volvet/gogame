@@ -35,6 +35,7 @@ $$
 $$
 UCB = \overline X_j + \sqrt{\frac{2\ln n}{n_j}}
 $$
+Where $\overline X_j$ is the average reward from arm $j$, $n_j$ is the number of times arm $j$ was played and n is the overall number of plays so far.
 
 ## Algorithm
 Four steps are applied per search iteration:
