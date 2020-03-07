@@ -39,10 +39,17 @@ $$
 ## Algorithm
 Four steps are applied per search iteration:
 * Selection
+
 Starting at the root node, a child selection policy is recursively applied to decend though the tree until the most urgent expandable node is reached. A node is expandable if it represents a non-terminal state and has unvisit children.
 * Expansion
+
+One or more child nodes are added to expand the tree according to the available actions.
 * Simulation
+
+A simulcation is run from new nodes according to the default policy to produce an outcome.
 * Backpropagation
+
+The simulcation result is backed up though the selected nmodes to update their statistics.
 
 ## Reference
 * A Survey of Monte Carlo Tree Search Mothods,   by Cameron Browne, etc.
