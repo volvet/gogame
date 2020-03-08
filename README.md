@@ -1,5 +1,5 @@
 # gogame
-Go game
+Learn go game from reference
 
 ## Documents
 * [Zobrist Hash](doc/zobrist.md)
