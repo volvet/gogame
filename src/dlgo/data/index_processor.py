@@ -12,15 +12,49 @@ else:
   from urllib import urlopen, urlretrieve
 
 
+def worker(url_and_target):
+  try:
+    (url, target_path) = url_and_target
+    #print('>>> Downloading ' + target_path)
+    urlretrieve(url, target_path)
+  except:
+    print('>>> Exiting child process')
+  return ">>> Downloaded " + target_path
+
 class KGSIndex:
   def __init__(self, kgs_url='https://u-go.net/gamerecords/',
                index_page='kgs_index.html',
                data_directory='data'):
     self.kgs_url = kgs_url
     self.index_page= index_page
+    self.data_directory = data_directory
     self.file_info= []
     self.urls = []
     self.load_index()
+    
+  def download_files(self):
+    if not os.path.exists(self.data_directory):
+      os.makedirs(self.data_directory)
+    
+    urls_to_download = []
+    for info in self.file_info:
+      url = info['url']
+      filename = info['filename']
+      if not os.path.isfile(self.data_directory + '/' + filename):
+        urls_to_download.append((url, self.data_directory + '/' + filename))
+        cores = multiprocessing.cpu_count()
+        pool = multiprocessing.Pool(processes=cores)
+        try:
+          it = pool.imap(worker, urls_to_download)
+          for r in it:
+            print(r)
+          pool.close()
+          pool.join()
+        except KeyboardInterrupt:
+          print('>>> Caught keyboardInterrupt, terminating workers')
+          pool.terminate()
+          pool.join()
+          sys.exit(-1)
     
   def create_index_page(self):
     if os.path.isfile(self.index_page):
@@ -58,4 +92,5 @@ class KGSIndex:
 if __name__ == '__main__':
   print('index_processor')
   index = KGSIndex()
+  index.download_files()
   #print(index)
