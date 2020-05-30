@@ -35,4 +35,6 @@ def get_encoder_by_name(name, board_size):
   return constructor(board_size)
 
 if __name__ == '__main__':
-  print('encoder.base')
+  print('dlgo.encoder.base')
+  encoder = get_encoder_by_name('oneplane', 19)
+  print(encoder)
