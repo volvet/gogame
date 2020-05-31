@@ -90,7 +90,7 @@ class KGSIndex:
     pass
 
 if __name__ == '__main__':
-  print('index_processor')
+  print('dlgo.data.index_processor')
   index = KGSIndex()
   index.download_files()
   #print(index)
