@@ -25,7 +25,7 @@ class Sampler:
     if data_type == 'test':
       return self.test_games
     elif data_type == 'train' and num_samples is not None:
-      return self.draw_training_samples()
+      return self.draw_training_samples(num_samples)
     elif data_type == 'train' and num_samples is None:
       return self.draw_all_training()
   
@@ -44,7 +44,7 @@ class Sampler:
     print('>>> Total number of games used: ' + str(len(available_games)))
     sample_set = set()
     while(len(sample_set) < num_sample_games):
-      sample = random.choise(available_games)
+      sample = random.choice(available_games)
       if sample not in sample_set:
         sample_set.add(sample)
     print('Drawn ' + str(num_sample_games) + ' samples:')
@@ -66,7 +66,7 @@ class Sampler:
     print('toal num training samples: ' + str(len(self.train_games)))
     
   def compute_test_samples(self):
-    if not os.path.isfile(self.test_folder):
+    if not os.path.isfile(self.test_sample_filename):
       test_games = self.draw_samples(self.num_test_games)
       test_sample_file = open(self.test_sample_filename, 'w')
       for sample in test_games:
@@ -97,7 +97,7 @@ class Sampler:
       sample = random.choice(available_games)
       if sample not in sample_set:
         sample_set.add(sample)
-    print('Drawn ' + str(num_sample_games) + 'sample')
+    print('Drawn ' + str(num_sample_games) + ' samples')
     return list(sample_set)
   
   def draw_all_training(self):

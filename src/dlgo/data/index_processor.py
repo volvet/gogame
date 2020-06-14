@@ -55,6 +55,8 @@ class KGSIndex:
           pool.terminate()
           pool.join()
           sys.exit(-1)
+      else:
+        print('>>> ' + self.data_directory + '/' + filename + ' was already downloaded')
     
   def create_index_page(self):
     if os.path.isfile(self.index_page):
@@ -85,7 +87,7 @@ class KGSIndex:
       filename = os.path.basename(url)
       split_file_name = filename.split('-')      
       num_games = int(split_file_name[len(split_file_name) - 2])
-      print(filename + ' ' + str(num_games))
+      print('file: ' + filename + ', num of games: ' + str(num_games))
       self.file_info.append({'url': url, 'filename':filename, 'num_games': num_games})
     pass
 
