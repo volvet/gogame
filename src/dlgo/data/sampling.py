@@ -98,7 +98,7 @@ class Sampler:
       if sample not in sample_set:
         sample_set.add(sample)
     print('Drawn ' + str(num_sample_games) + 'sample')
-    return list(game_set)
+    return list(sample_set)
   
   def draw_all_training(self):
     available_games = []
@@ -117,7 +117,7 @@ class Sampler:
     for sample in available_games:      
       if sample not in sample_set:
         sample_set.add(sample)
-    print('Drawn all samples, ie ' + str(num_sample_games) + ' samples:')
+    print('Drawn all samples, ie ' + str(len(sample_set)) + ' samples:')
     return list(sample_set)
     pass
 
