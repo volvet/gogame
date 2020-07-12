@@ -17,5 +17,9 @@
 ### Exponential Decay
   The exponential decay has the methematical form is ```lr = lr0*e^(-kt), where k are hyperparameters and t is the ineration number```.
 
+### Momentum
+  
+
 ## Reference
 * https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1
+* https://cnl.salk.edu/~schraudo/teach/NNcourse/momrate.html
