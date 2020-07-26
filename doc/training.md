@@ -9,8 +9,9 @@
 ### Time-Based Decay
   The mathematical form of time-based decay is 
   $$
-  lr = \frac{lr0}{1+kt}, where lr, k are hyperparameters and t is the iteration number
+  lr = \frac{lr0}{1+kt}
   $$.
+  where $lr$, $k$ are hyperparameters and $t$ is the iteration number
   
 ### Step Decay
   Step decay schedule drops the learning rate by a factor every few epochs. The methematical form of stop decay is
