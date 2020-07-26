@@ -26,6 +26,9 @@
   where $k$ are hyperparameters and $t$ is the ineration number.
 
 ### Momentum
+$$
+  w = w = \alpha(\gamma U + (1+\gamma)\partial w)
+$$
   
 
 ## Reference
