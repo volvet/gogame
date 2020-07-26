@@ -7,7 +7,10 @@
   Constant learning rate is the default learning rate schedule in SGD Optimizer in Keras. Momentum and decay rate are both set to zero by default.
   
 ### Time-Based Decay
-  The mathematical form of time-based decay is ```lr=lr0/(1+kt), where lr, k are hyperparameters and t is the iteration number```.
+  The mathematical form of time-based decay is 
+  $$
+  lr = frac{lr0}{1+kt}, where lr, k are hyperparameters and t is the iteration number
+  $$.
   
 ### Step Decay
   Step decay schedule drops the learning rate by a factor every few epochs. The methematical form of stop decay is
