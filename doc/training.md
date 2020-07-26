@@ -9,6 +9,7 @@ $$
   w = w - \alpha(\gamma u + (1+\gamma)\partial w)
 $$
   
+### Adagrad and Adadelta
 
 ## Reference
 * https://towardsdatascience.com/learning-rate-schedules-and-adaptive-learning-rate-methods-for-deep-learning-2c8f433990d1
