@@ -27,7 +27,7 @@
 
 ### Momentum
 $$
-  w = w = \alpha(\gamma U + (1+\gamma)\partial w)
+  w = w - \alpha(\gamma U + (1+\gamma)\partial w)
 $$
   
 
