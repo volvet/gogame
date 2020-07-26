@@ -10,14 +10,14 @@
   The mathematical form of time-based decay is 
   $$
   lr = \frac{lr0}{1+kt}
-  $$.
-  where $lr$, $k$ are hyperparameters and $t$ is the iteration number
+  $$
+  where $lr$, $k$ are hyperparameters and $t$ is the iteration number, $lr0$ is the initial value of $lr$
   
 ### Step Decay
   Step decay schedule drops the learning rate by a factor every few epochs. The methematical form of stop decay is
-  ```
-  lr = lr0 * drop^floor(epoch/epochs_drop)
-  ```
+  $$$
+  lr = lr0 times drop^floor(epoch/epochs_drop)
+  $$$
 ### Exponential Decay
   The exponential decay has the methematical form is ```lr = lr0*e^(-kt), where k are hyperparameters and t is the ineration number```.
 
