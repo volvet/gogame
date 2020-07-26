@@ -9,7 +9,7 @@
 ### Time-Based Decay
   The mathematical form of time-based decay is 
   $$
-  lr = frac{lr0}{1+kt}, where lr, k are hyperparameters and t is the iteration number
+  lr = \frac{lr0}{1+kt}, where lr, k are hyperparameters and t is the iteration number
   $$.
   
 ### Step Decay
