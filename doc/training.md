@@ -19,7 +19,11 @@
   lr = lr0 \times drop^{floor(\frac{epoch}{epochs_drop})}
   $$
 ### Exponential Decay
-  The exponential decay has the methematical form is ```lr = lr0*e^(-kt), where k are hyperparameters and t is the ineration number```.
+  The exponential decay has the methematical form is 
+  $$ 
+  lr = lr0 \times e^{-kt}
+  $$
+  where $k$ are hyperparameters and $t$ is the ineration number.
 
 ### Momentum
   
