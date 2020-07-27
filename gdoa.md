@@ -5,5 +5,14 @@
 
 梯度下降是通过目标函数($J(\theta)$)的梯度($\Delta J(\theta)$)的相反方向更新模型参数($\theta \in R^d$)来最小化目标函数($J(\theta)$)的方法. 学习因子($\eta$)决定了我们到达最小值或者局部最小值的步长, 换句话说, 我们沿着目标函数所构建的曲面的斜坡下滑直至到达谷底. 如果你不熟悉梯度下降， 可以在[这里](https://cs231n.github.io/optimization-1/)找到相关介绍.
 
+## 梯度下降分类
+梯度下降大致可以分为三类， 他们的区别在于使用多少数据来计算目标函数的梯度. 根据训练集中样本的数量， 我们需要在参数迭代更新的精度和训练时长这两者间权衡取舍.
+
+### 批量梯度下降(Batch Gradient Descent)
+
+### 随机梯度下降(Stochastic Gradient Descent)
+
+### 小批量梯度下降(Mini-batch Gradient Descent)
+
 # Original Post
 * https://ruder.io/optimizing-gradient-descent/ by SEBASTIAN RUDER
