@@ -3,7 +3,7 @@
 
 本文就是期望帮助你理解各种不同的梯度下降优化算法的行为, 以便更好的在深度学习实践中应用这些算法. 首先我们先回顾一下不同种类的梯度下降的方法， 然后总结一下在日常训练中遇到的困难， 接下来, 我们通过分析那些常用的梯度下降算法诞生的原因以及如何推到它们的更新规则(update rule)来介绍这些算法，同时我们也会简单展示下如何在并行/分布式系统中应用这些算法, 最后， 我们讨论下其他有益于优化梯度下降的策略.
 
-梯度下降是通过目标函数(Objective Function)的梯度($\delta J(\theta)$)的相反方向更新模型参数($\theta \in R^d$)来最小化目标函数($J(\theta)$)的方法.
+梯度下降是通过目标函数(Objective Function)的梯度($\Delta J(\theta)$)的相反方向更新模型参数($\theta \in R^d$)来最小化目标函数($J(\theta)$)的方法.
 
 # Original Post
 * https://ruder.io/optimizing-gradient-descent/ by SEBASTIAN RUDER
