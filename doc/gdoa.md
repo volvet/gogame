@@ -27,5 +27,30 @@ for i in range(nb_epochs):
 
 ### 小批量梯度下降(Mini-batch Gradient Descent)
 
+### 梯度下降面临的挑战
+
+## 梯度下降算法
+
+### Momentum
+
+### Nesterov accelerated gradient
+
+### Adagrad
+
+### Adadelta
+
+### RMSprop
+
+### Adam
+
+### AdaMax
+
+### Nadam
+
+### AMSGrad
+
+## Additional strategies for optimizing SGD
+
+
 # Original Post
 * https://ruder.io/optimizing-gradient-descent/ by SEBASTIAN RUDER
