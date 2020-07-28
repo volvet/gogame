@@ -31,7 +31,10 @@ $$
 在训练集样本比较多的情形下， 通常会存在比较多的相似样本， 批量梯度下降需要计算所有样本才能去更新参数， 这样势必存在冗余计算， 而随机梯度下降则相反， 每个样本的计算都会导致参数更新， 这样就大大消除了计算冗余. 因此随机梯度下降的训练速度通常都比批量梯度下降快的多， 也可以被用于在线训练.
 
 随机梯度下降每次更新参数的幅度变化比较大， 这会导致目标函数出现剧烈震荡, 如图一所示:
-![图一](https://ruder.io/content/images/2016/09/sgd_fluctuation.png)
+<div style="align: center">
+<img src="https://ruder.io/content/images/2016/09/sgd_fluctuation.png"/>
+</div>
+<center>图一</center>
 
 ### 小批量梯度下降(Mini-batch Gradient Descent)
 
