@@ -24,6 +24,10 @@ for i in range(nb_epochs):
 给定训练次数， 每次训练我们都通过对损失函数求导， 来计算模型参数的梯度矢量.  需要强调的是， 当前的深度学习框架都已经提供了高效的求导方法， 但是如果你是自己实现损失函数求导的话， 则需要对计算所得的梯度进行校验， [这里](https://cs231n.github.io/neural-networks-3/) 提供了一些关于梯度校验的有效的实践方法。 接下来， 梯度和学习因子决定了模型参数将被如何更新. 如果损失函数是凸函数的话， 批量梯度下降会收敛于最优解， 如果不是， 则会收敛于局部最优解.
 
 ### 随机梯度下降(Stochastic Gradient Descent)
+随机梯度下降跟批量梯度下降不同的是， 每个样本($x^i, y^i$)都会计算梯度并且更新模型参数:
+$$
+\theta = \theta - \eta \times \nabla_{\theta}J(\theta;x^i;y^i)
+$$
 
 ### 小批量梯度下降(Mini-batch Gradient Descent)
 
