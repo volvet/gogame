@@ -72,5 +72,5 @@ for i in range(nb_epochs):
 ## Additional strategies for optimizing SGD
 
 
-# Original Post
+# 原文(Original Post)
 * https://ruder.io/optimizing-gradient-descent/ by SEBASTIAN RUDER
