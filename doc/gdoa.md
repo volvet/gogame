@@ -53,6 +53,15 @@ for i in range(nb_epochs):
 $$
 \theta = \theta - \eta \times \nabla_{\theta}J(\theta;x^{i:i+n};y^{i:i+n})
 $$
+这种方法， a)减小的每次模型参数更新的幅度， 这样更容易是收敛趋于稳定， b)有效利用当代深度学习框架所提供的高度优化的矩阵运算来提升梯度计算效率, 小批量梯度每次迭代的样本数大多在50～256左右，可以根据不同的场景选择不同的样本数. 小批量梯度下降是训练神经网络最常用的算法， 通常也被直接称为随机梯度下降. 为了描述方便， 下文中我们会省略参数$x^{i:i+n}$和$y^{i:i+n}$.
+实现的代码大致如下：
+```
+for i in range(nb_epochs):
+    np.random.shuffle(data)
+    for batch in get_batches(data, batch_size=50):
+        params_grad = evaluate_gradient(loss_function, batch, params)
+        params = params - learning_rate * params_grad
+```
 
 ### 梯度下降面临的挑战
 
