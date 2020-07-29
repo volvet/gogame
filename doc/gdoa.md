@@ -49,6 +49,10 @@ for i in range(nb_epochs):
 ```
 
 ### 小批量梯度下降(Mini-batch Gradient Descent)
+小批量梯度下降结合了批量梯度下降和随机梯度下降的优点， 这种方法会计算每一个小批量的样本的梯度并且更新模型参数：
+$$
+\theta = \theta - \eta \times \nabla_{\theta}J(\theta;x^{i:i+n};y^{i:i+n})
+$$
 
 ### 梯度下降面临的挑战
 
