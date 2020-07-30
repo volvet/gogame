@@ -76,6 +76,12 @@ for i in range(nb_epochs):
 随机梯度下降很难越过峡谷， 峡谷是指在某一维度上的表面弯曲程度远超过其他维度的区域， 在局部最优点周围常能见到这种情形.   遇到这种情形的时候， 随机梯度下降会在峡谷震荡， 艰难的到达局部最优的谷底. 如图二所示.
 
 ![Image](https://ruder.io/content/images/2015/12/without_momentum.gif)
+图二
+
+Momentum 就是针对这种场景的应对方法， 它可以加速随机梯度下降在有价值的方向上的快速下降， 并且抑制无效的震荡， 如图三所示.
+
+![Image](https://ruder.io/content/images/2015/12/with_momentum.gif)
+图三
 
 ### Nesterov accelerated gradient
 
