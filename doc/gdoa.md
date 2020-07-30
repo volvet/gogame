@@ -85,9 +85,11 @@ Momentum 就是针对这种场景的应对方法， 它可以加速随机梯度�
 
 Momentum做到这一点仅仅引入了一个部分$\gamma$的上一次更新矢量到当前的更新矢量， 用公式来描述:
 $$
-v_t = \gamma \times v_{t-1} + \nabla_{\theta}J(\theta)
+v_t = \gamma \times v_{t-1} + \eta \times \nabla_{\theta}J(\theta)
+\theta = \theat - v_t
 $$
-
+注意： 某些实现可能会交换等式的正负号.  $\gamma$ 通常取值为$0.9$或相近的值.
+想象一下， 当你把一个球从山顶上往下扔， 这个球在滚下来的过程中会累积动量， 变的越来越快， 直到到达最终速度为止， 这边的最终速度可以理解为空气存在阻力， 数学意义上表示为$\gamma \le 1$. 同样的事情也发生在我们的模型参数更新过程, 如果参数更新的方向一致， Monmentum会增大更新的幅度， 反正则会减小更新幅度， 作为结果， 我们可以更快的收敛和有效减少震荡. 
 ### Nesterov accelerated gradient
 
 ### Adagrad
