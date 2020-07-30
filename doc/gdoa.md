@@ -83,6 +83,11 @@ Momentum 就是针对这种场景的应对方法， 它可以加速随机梯度�
 ![Image](https://ruder.io/content/images/2015/12/with_momentum.gif)
 图三
 
+Momentum做到这一点仅仅引入了一个部分$\gamma$的上一次更新矢量到当前的更新矢量， 用公式来描述:
+$$
+v_t = \gamma \times v_{t-1} + \nabla_{\theta}J(\theta)
+$$
+
 ### Nesterov accelerated gradient
 
 ### Adagrad
