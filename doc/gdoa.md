@@ -113,6 +113,12 @@ $$
 ### Adagrad
 Adagrad 可以基于模型参数特征来自适应调整学习因子, 对于出现频率高的特征采用较大的学习因子, 对于出现频率低的特征采用较大的学习因子. 因此， 它非常使用处理稀疏样本集. Dean等人在google工作期间发现adagrad可以有效的提升SGD的鲁棒性, 并将adagrad应用于大规模神经网络的训练, 比如从Youtube视频中识别猫. 此外, Pennington等人采用adagrad来训练GloVe词嵌入(GloVe word embedding)， 低频的词要比高频的词需要更大的学习因子.
 
+我们之前的训练都是使用相同的学习因子$\eta$来更新模型参数. Adagrad则会针对不同的参数$\theta_{i}$， 选择不同的学习因子. 
+$$
+g_{t,i} = \nabla_{\theta}J(\theta_{t,i})
+$$
+
+
 
 ### Adadelta
 
