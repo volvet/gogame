@@ -102,7 +102,10 @@ $$
 $$
 \theta = \theta - v_t
 $$
+跟momentum方法相似, $\gamma$的值被预设为$0.9$左右, 当momentum方法计算当前梯度（图四中的小的蓝色矢量)然后再更新累计的梯度（图四中的大的蓝色矢量). 而
 
+![Image](https://ruder.io/content/images/2016/09/nesterov_update_vector.png)
+图四
 
 ### Adagrad
 
