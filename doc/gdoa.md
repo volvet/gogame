@@ -98,7 +98,9 @@ $$
 Nesterov 加速梯度下降就是可以给予momentum预知的能力, 我们知道$\gamma v_{t-1}$会用来更新模型参数$\theta$, 计算$\theta - \gamma \times v_{t-1}$可以得到下一时刻模型参数的近似值(这个梯度在momentum方法计算梯度时是被忽略了). 这也是对未来我们的模型参数将要被如何更新的估计. 于是我们可以使用未来估计的模型参数值， 而不是当前的模型参数值来更有效的计算梯度. 用公式来描述:
 $$
 v_t = \gamma \times v_{t-1} + \eta \times \nabla_{\theta}J(\theta - \gamma \times v_{t-1})
-\theta = \theta - v_
+$$
+$$
+\theta = \theta - v_t
 $$
 
 
