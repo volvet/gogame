@@ -151,7 +151,7 @@ $$
 $$
 在Adggrad, 则此公式更新为:
 $$
-\Delta \theta_t = - \frac{\eta}{\sqrt{G_t + \epsilon}} \cdot g_t
+\Delta \theta_t = - \frac{\eta}{\sqrt{G_t + \epsilon}} \odot g_t
 $$
 用$E_t$来替换对角矩阵$G_t$
 $$
@@ -159,7 +159,7 @@ $$
 $$
 可见分母可以被视为梯度的均方根， 于是上式可以写为:
 $$
-\Delta \theta_t = - \frac{\eta}{RMS[g]_t}
+\Delta \theta_t = - \frac{\eta}{RMS[g]_t}g_t
 $$
 
 
