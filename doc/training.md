@@ -10,10 +10,8 @@ $$
 $$
   
 ### Adagrad and Adadelta
+[Gradient descent optimization algorithms](gdoa.md)
 
-$$
-E_t = E_{t-1}
-$$
 
 ## Reference
 * https://ruder.io/optimizing-gradient-descent/
