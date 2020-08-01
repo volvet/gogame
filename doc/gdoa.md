@@ -162,6 +162,12 @@ $$
 \Delta \theta_t = - \frac{\eta}{RMS[g]_t}g_t
 $$
 
+作者指出， 上式中各个部分的计算单位不一致，  参数更新公式必须跟参数有相同的计算单位. 为了解决这个问题，作者定义了：
+$$
+E(\Delta \theta^2) = \gamma E(\Delta \theta^2)_{t-1} + (1 - \gamma) \Delta \theta^2_t
+$$
+
+
 
 
 ### RMSprop
