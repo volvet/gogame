@@ -190,13 +190,14 @@ $$
 ### RMSprop
 RMSprop是未公开发表的自适应调整学习因子的算法, 是由Geoff Hinton 提出. [Lecture slides lec6](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
 
-RMSProp和Adadelta是在相同的时间被独立研究出来的， 其目的都是为了解决Adagrad的学习因子递减至无限小的问题. RMSProp实际上等价于:
+RMSProp和Adadelta是在相同的时间被独立研究出来的， 其目的都是为了解决Adagrad的学习因子递减至无限小的问题. RMSProp实际上等价于Adadelta最早被提出时的样子.
 $$
 E_t = 0.9E_{t-1} + 0.1g^2_t
 $$
 $$
-\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{E_t + epsilon}}
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{E_t + \epsilon}}
 $$
+RMSProp将学习因子除以梯度的均方根(指数衰减), Hinton建议$eta$的值为$0.9$, $\epsilon$的值为$0.001$
 
 ### Adam
 
