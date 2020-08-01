@@ -219,8 +219,9 @@ $$
 $$
 于是, Adam算法的公式表示为：
 $$
-\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{hat{v+t}} + \epsilon}\hat{m_t}
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v+t}} + \epsilon}\hat{m_t}
 $$
+作者建议$\beta_1$和$\beta_2$的取值为0.9和0.999, $\epsilon$的取值为$10^{-8}$.  在实际的训练中, Adam表现出了良好的性能.
 
 ### AdaMax
 
