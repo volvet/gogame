@@ -217,6 +217,10 @@ $$
 $$
 \hat{v_t} = \frac{v_t}{1-\beta^t_2}
 $$
+于是, Adam算法的公式表示为：
+$$
+\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{hat{v+t}} + \epsilon}\hat{m_t}
+$$
 
 ### AdaMax
 
