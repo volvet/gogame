@@ -127,6 +127,11 @@ $$
 $$
 其中， $G_t \in R^{d \times d}$ 是一个对角矩阵, 其对角线上的每一个元素$i$是到阶段$t$为止, 所有梯度$\theta_i$的平方和.  $\epsilon$是为了避免除零的平滑项，通常取值$1e-8$. 有趣的是， 如果没有开方操作， adagrad的性能会变的很差.
 
+我们也可以把上式写成矩阵-矢量乘:
+$$
+\theta_{t+1,i} = \theta_{t} - \frac{\eta}{\sqrt{G_{t}+\epsilon}} \cdot g_{t}
+$$
+
 
 
 ### Adadelta
