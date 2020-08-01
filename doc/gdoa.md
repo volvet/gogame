@@ -168,9 +168,17 @@ E(\Delta \theta^2) = \gamma E(\Delta \theta^2)_{t-1} + (1 - \gamma) \Delta \thet
 $$
 于是:
 $$
-RMS[\Delta \theta_t] = \sqrt{E[\Delta \theta^2]_t + \epsilon}
+RMS[\Delta \theta]_t = \sqrt{E[\Delta \theta^2]_t + \epsilon}
 $$
 
+由于$RMS[\Delta \theta]_t$是未知量, 所以用前一次的$RMS$来模拟. 这样就可以用$RMS[\Delta \theta]_{t-1}$来替换$\eta$, 最终， adadelta更新公式可以写为:
+$$
+\Delta \theta_t = - \frac{RMS[\Delta \theta]_{t-1}{RMS[g]_t} \cdot g_t
+$$
+$$
+\theta_{t+1} = \theta_t + \Delta \theta_t
+$$
+使用adadelta，我们无需指定学习因子， 因为她已经在更新公式中被消去了.
 
 
 
