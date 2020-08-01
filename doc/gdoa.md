@@ -166,6 +166,11 @@ $$
 $$
 E(\Delta \theta^2) = \gamma E(\Delta \theta^2)_{t-1} + (1 - \gamma) \Delta \theta^2_t
 $$
+于是:
+$$
+RMS[\Delta \theta_t] = \sqrt{E[\Delta \theta^2]_t + \epsilon}
+$$
+
 
 
 
