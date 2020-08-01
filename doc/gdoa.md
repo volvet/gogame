@@ -129,7 +129,7 @@ $$
 
 我们也可以把上式写成矩阵-矢量乘:
 $$
-\theta_{t+1,i} = \theta_{t} - \frac{\eta}{\sqrt{G_{t}+\epsilon}} \cdot g_{t}
+\theta_{t+1,i} = \theta_{t} - \frac{\eta}{\sqrt{G_{t}+\epsilon}} \odot g_{t}
 $$
 
 
