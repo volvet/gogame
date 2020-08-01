@@ -187,10 +187,13 @@ $$
 $$
 使用adadelta，我们无需指定学习因子， 因为她已经在更新公式中被消去了.
 
-
-
-
 ### RMSprop
+RMSprop是未公开发表的自适应调整学习因子的算法, 是由Geoff Hinton 提出. [Lecture slides lec6](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
+
+RMSProp和Adadelta是在相同的时间被独立研究出来的， 其目的都是为了解决Adagrad的学习因子递减至无限小的问题. RMSProp实际上等价于:
+$$
+E[g^2]_t = 0.9E[g^2]_{t-1} + 0.1g^2_t
+$$
 
 ### Adam
 
