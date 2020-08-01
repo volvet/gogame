@@ -11,5 +11,9 @@ $$
   
 ### Adagrad and Adadelta
 
+$$
+E[g^2]_t = \gamma E[g^2]_{t-1} + (1 - \gamma) g^2_t
+$$
+
 ## Reference
 * https://ruder.io/optimizing-gradient-descent/
