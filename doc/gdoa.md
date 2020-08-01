@@ -125,6 +125,8 @@ Adagrad会根据不同的参数采用不同的学习因子, 即修改SGD过程�
 $$
 \theta_{t+1,i} = \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}} . g_{t,i}
 $$
+其中， $G_t \in R^{d \times \d}$ 是一个对角矩阵, 其对角线上的每一个元素$i$是到阶段$t$为止, 所有梯度$\theta_i$的平方和.  $\epsilon$是为了避免除零的平滑项，通常取值$1e-8$. 有趣的是， 如果没有开方操作， adagrad的性能会变的很差.
+
 
 
 ### Adadelta
