@@ -171,7 +171,7 @@ $$
 RMS[\Delta \theta]_t = \sqrt{E[\Delta \theta^2]_t + \epsilon}
 $$
 
-由于 $RMS(\Delta \theta)_{t} $
+由于 $RMS[\Delta \theta]_{t}$
 
 是未知量, 所以用前一次的 $RMS$ 来模拟. 这样就可以用
 
