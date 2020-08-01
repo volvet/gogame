@@ -140,7 +140,7 @@ Adadelta是adagrad算法的扩展，  它寻求解决学习因子单调递减的
 
 
 $$
-E[g^2]_t = \gamma \times E[g^2]_{t-1} + (1 - \gamma) \times g^2_t
+E[g^2]_t = \gamma E[g^2]_{t-1} + (1 - \gamma) g^2_t 
 $$
 
 $$
