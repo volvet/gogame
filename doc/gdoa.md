@@ -139,9 +139,12 @@ Adagrad的缺点是: 它的分母跟历史梯度的平方和相关， 这个值�
 Adadelta是adagrad算法的扩展，  它寻求解决学习因子单调递减的问题.  跟adagrad算法需要求历史所有梯度的平方和不同， adadelta将球平方和的窗口限制为某个固定值$w$. 为了避免在训练过程中需要持续保存$w$个历史梯度值,  adadelta寻求一种更为高效的做法，
 
 $$
-E[g^2]_t = \gamma \times
+E[g^2]_t
 $$
-$E[g^2]_t = \gamma E[g^2]_{t-1} + (1 - \gamma)g^2_t$
+
+$$
+E[g^2]_t = \gamma E[g^2]_{t-1} + (1 - \gamma)g^2_t
+$$
 
 
 ### RMSprop
