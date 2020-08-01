@@ -123,7 +123,7 @@ $$
 $$
 Adagrad会根据不同的参数采用不同的学习因子, 即修改SGD过程中的学习因子, 用公式来描述:
 $$
-\theta_{t+1,i} = \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}}
+\theta_{t+1,i} = \theta_{t,i} - \frac{\eta}{\sqrt{G_{t,ii}+\epsilon}} . g_{t,i}
 $$
 
 
