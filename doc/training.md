@@ -12,7 +12,7 @@ $$
 ### Adagrad and Adadelta
 
 $$
-E[g^2]_t = 
+E[g^2]_t = E[g^2]_t
 $$
 
 ## Reference
