@@ -197,7 +197,7 @@ $$
 $$
 \theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{E_t + \epsilon}}
 $$
-RMSProp将学习因子除以梯度的均方根(指数衰减), Hinton建议$eta$的值为$0.9$, $\epsilon$的值为$0.001$
+RMSProp将学习因子除以梯度的均方根(指数衰减), Hinton建议$\eta$的值为$0.9$, $\epsilon$的值为$0.001$
 
 ### Adam
 
