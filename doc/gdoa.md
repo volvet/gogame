@@ -142,6 +142,23 @@ $$
 E_t = \gamma E_{t-1} + (1 - \gamma)g^2_t
 $$
 
+$\gamma$的值大致可以设置为$0.9$左右.  为简化起见， 我们可以把SGD的参数更新矢量记为$\Delta \theta_t$：
+$$
+\Delta \theta_t = - \eta \cdot g_t
+$$
+$$
+\theta_{t+1} = \theta_t + \Delta \theta_t
+$$
+在Adggrad, 则此公式更新为:
+$$
+\Delta \theta_t = - \frac{\eta}{\sqrt{G_t + \epsilon}}
+$$
+用$E_t$来替换对角矩阵$G_t$
+$$
+\Delta \theta_t = - \frac{\eta}{\sqrt{E_t + \epsilon}}
+$$
+
+
 
 ### RMSprop
 
