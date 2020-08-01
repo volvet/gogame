@@ -200,6 +200,14 @@ $$
 RMSProp将学习因子除以梯度的均方根(指数衰减), Hinton建议$\eta$的值为$0.9$, $\epsilon$的值为$0.001$
 
 ### Adam
+Adaptive Moment Estimation(Adam) 是另一种可以根据参数特征自适应调整学习因子的算法.   除了像Adadelta和RMSprop那样需要保存一个指数衰减的历史平方梯度$v_t$, Adam还需要保存另一个指数衰减的历史梯度$m_t$， 有点像momentum.  Momentum可以在小球滚下斜坡时被观察到， Adam的行为就像一个重球, 带有不可忽视的摩檫力， 它倾向于在收敛到平坦的错误表面(error surface).  用数学公式来表示:
+$$
+m_t = \beta_1 m_{t-1} + (1 - \beta_1)g_t
+$$
+$$
+v_t = \beta_2 + (1 - \beta_2)g^2_t
+$$
+
 
 ### AdaMax
 
