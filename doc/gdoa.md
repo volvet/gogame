@@ -232,12 +232,22 @@ $$
 $$
 v_t = \beta_2^p v_{t-1} + (1 - \beta_2^p)g_t^p
 $$
+通常高$p$范数($p \gt 2$)不是平稳的， 所以实践上常用$l1$和$l2$范数. 但是$l \infty$范数却通常是平稳的, 所以作者提出了AdamMax算法, 为了避免混乱， 用$u_t$来描述$l \infty$的$v_t$:
+$$
+u_t = \beta_2^{\infty} v_{t-1} + (1 - \beta_2^{\infty}g_t^{\infty} = max(\beta_2 \cdot v_{t-1}, |g_t|)
+$$
 
 ### Nadam
+TODO
 
 ### AMSGrad
+TODO
+
+### Visualization of algorithms
+TODO
 
 ## Additional strategies for optimizing SGD
+TODO
 
 
 # 原文(Original Post)
