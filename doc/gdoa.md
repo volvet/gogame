@@ -234,8 +234,13 @@ v_t = \beta_2^p v_{t-1} + (1 - \beta_2^p)g_t^p
 $$
 通常高$p$范数($p \gt 2$)不是平稳的， 所以实践上常用$l1$和$l2$范数. 但是$l \infty$范数却通常是平稳的, 所以作者提出了AdamMax算法, 为了避免混乱， 用$u_t$来描述$l \infty$的$v_t$:
 $$
-u_t = \beta_2^{\infty} v_{t-1} + (1 - \beta_2^{\infty}g_t^{\infty} = max(\beta_2 \cdot v_{t-1}, |g_t|)
+u_t = \beta_2^{\infty} v_{t-1} + (1 - \beta_2^{\infty}g_t^{\infty}) = max(\beta_2 \cdot v_{t-1}, |g_t|)
 $$
+于是， AdaMax的更新规则为:
+$$
+\theta_{t+1} = \theta_{t} - \frac{\eta}{u_t}\hat{m_t}
+$$
+因为$u_t$是个取最大值的操作结果， 所以AdaMax解决了偏向零的问题. 事件中, 建议的取值为: $\eta = 0.002, \beta_1 = 0.9, \beta_2 = 0.999$ 
 
 ### Nadam
 TODO
