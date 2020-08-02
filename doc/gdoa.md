@@ -230,7 +230,7 @@ v_t = \beta_2 v_{t-1} + (1 - \beta_2)g^2_t
 $$
 我们可以推广此式为$l_p$范数, Adam的作者也把$\beta_2$参数化(parameterize)为$\beta_2^p$
 $$
-\v_t = \beta_2^p v_{t-1} + (1 - \beta_2^p)g_t^p
+v_t = \beta_2^p v_{t-1} + (1 - \beta_2^p)g_t^p
 $$
 
 ### Nadam
