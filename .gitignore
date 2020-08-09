@@ -3,5 +3,5 @@
 __pycache__
 *.html
 *.tar.gz
-src/dlgo/data/data
+src/data
 *.txt
