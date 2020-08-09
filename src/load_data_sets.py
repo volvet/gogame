@@ -9,12 +9,36 @@ import sys
 import os
 import itertools
 import struct
+import gzip
+import numpy as np
 
+import go
+import utils
+from features import bulk_extract_features
 from sgf_wrapper import replay_sgf
 
 CHUNK_SIZE = 4096
 CHUNK_HEADER_FORMAT = 'iii?'
 CHUNK_HEADER_SIZE = struct.calcsize(CHUNK_HEADER_FORMAT)
+
+def take_n(n, iterable):
+  return list(itertools.islice(iterable, n))
+
+def iter_chunks(chunk_size, iterator):
+  while True:
+    next_chunk = take_n(chunk_size, iterator)
+    # If len(iterable) % chunk_size == 0, don't return an empty chunk.
+    if next_chunk:
+      yield next_chunk
+    else:
+      break
+
+def make_onehot(coords):
+  num_positions = len(coords)
+  output = np.zeros([num_positions, go.N ** 2], dtype=np.uint8)
+  for i, coord in enumerate(coords):
+    output[i, utils.flatten_coords(coord)] = 1
+  return output
 
 def find_sgf_files(*dataset_dirs):
   for dataset_dir in dataset_dirs:
@@ -30,13 +54,19 @@ def get_positions_from_sgf(file):
       if position_w_content.is_usable():
         yield position_w_content
         
-def split_test_training(position_w_context, est_num_positions):
+def split_test_training(positions_w_context, est_num_positions):
   desired_test_size = 10**5
   if est_num_positions < 2 * desired_test_size:
     print('Not enough data to have a full test set, splitting 67:33')
+    positions_w_context = list(tqdm.tqdm(positions_w_context))
+    test_size = len(positions_w_context) // 3
+    return positions_w_context[:test_size], [positions_w_context[test_size:]]
   else:
     print('Estimated number of chunk: %s' % (
       (est_num_positions - desired_test_size) // CHUNK_SIZE), file=sys.stderr)
+    test_chunk = take_n(desired_test_size, positions_w_context)
+    training_chunks = iter_chunks(CHUNK_SIZE, positions_w_context)
+    return test_chunk, training_chunks
 
 def parse_data_sets(*data_sets):
   print('Searching the following directories {} for SGFS'.format('\n'.join(data_sets)))
@@ -44,8 +74,77 @@ def parse_data_sets(*data_sets):
   print('%s sgf files found' % len(sgf_files), file=sys.stderr)
   est_num_positions = len(sgf_files) * 200
   positions_w_context = itertools.chain(*map(get_positions_from_sgf, sgf_files))
-  split_test_training(positions_w_context, est_num_positions)
+  test_chunks, training_chunks = split_test_training(positions_w_context, est_num_positions)
+  return test_chunks, training_chunks
   
+
+class DataSet(object):
+  def __init__(self, pos_features, next_moves, results, is_test=False):
+    self.pos_features = pos_features
+    self.next_moves = next_moves
+    self.results = results
+    self.is_test = is_test
+    assert pos_features.shape[0] == next_moves.shape[0], "Didn't pass in same number of pos_features and next_moves."
+    self.data_size = pos_features.shape[0]
+    self.board_size = pos_features.shape[1]
+    self.input_planes = pos_features.shape[-1]
+    self._index_within_epoch = 0
+    self.shuffle()
+
+  def shuffle(self):
+    perm = np.arange(self.data_size)
+    np.random.shuffle(perm)
+    self.pos_features = self.pos_features[perm]
+    self.next_moves = self.next_moves[perm]
+    self._index_within_epoch = 0
+
+  def get_batch(self, batch_size):
+    assert batch_size < self.data_size
+    if self._index_within_epoch + batch_size > self.data_size:
+      self.shuffle()
+    start = self._index_within_epoch
+    end = start + batch_size
+    self._index_within_epoch += batch_size
+    return self.pos_features[start:end], self.next_moves[start:end]
+
+  @staticmethod
+  def from_positions_w_context(positions_w_context, is_test=False):
+    positions, next_moves, results = zip(*positions_w_context)
+    extracted_features = bulk_extract_features(positions)
+    encoded_moves = make_onehot(next_moves)
+    return DataSet(extracted_features, encoded_moves, results, is_test=is_test)
+
+  def write(self, filename):
+    header_bytes = struct.pack(CHUNK_HEADER_FORMAT, self.data_size, self.board_size, self.input_planes, self.is_test)
+    position_bytes = np.packbits(self.pos_features).tostring()
+    next_move_bytes = np.packbits(self.next_moves).tostring()
+    with gzip.open(filename, "wb", compresslevel=6) as f:
+      f.write(header_bytes)
+      f.write(position_bytes)
+      f.write(next_move_bytes)
+
+  @staticmethod
+  def read(filename):
+    with gzip.open(filename, "rb") as f:
+      header_bytes = f.read(CHUNK_HEADER_SIZE)
+      data_size, board_size, input_planes, is_test = struct.unpack(CHUNK_HEADER_FORMAT, header_bytes)
+
+      position_dims = data_size * board_size * board_size * input_planes
+      next_move_dims = data_size * board_size * board_size
+
+      # the +7 // 8 compensates for numpy's bitpacking padding
+      packed_position_bytes = f.read((position_dims + 7) // 8)
+      packed_next_move_bytes = f.read((next_move_dims + 7) // 8)
+      # should have cleanly finished reading all bytes from file!
+      assert len(f.read()) == 0
+
+      flat_position = np.unpackbits(np.fromstring(packed_position_bytes, dtype=np.uint8))[:position_dims]
+      flat_nextmoves = np.unpackbits(np.fromstring(packed_next_move_bytes, dtype=np.uint8))[:next_move_dims]
+
+      pos_features = flat_position.reshape(data_size, board_size, board_size, input_planes)
+      next_moves = flat_nextmoves.reshape(data_size, board_size * board_size)
+
+    return DataSet(pos_features, next_moves, [], is_test=is_test)
 
 if __name__ == '__main__':
   print('load_data_sets')
