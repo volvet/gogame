@@ -34,10 +34,11 @@ def preprocess(*data_sets, processed_dir='processed_data'):
   test_filename = os.path.join(processed_dir, 'test.chunk.gz')
   test_dataset.write(test_filename)
   
-  print('Write training chunks')
-  training_dataset = map(DataSet.from_positions_w_context, training_chunks)
-  for i, dataset in tqdm.tqdm(enumerate(training_dataset)):
-    pass
+  print('\nWrite training chunks')
+  training_datasets = map(DataSet.from_positions_w_context, training_chunks)
+  for i, dataset in tqdm.tqdm(enumerate(training_datasets)):
+    train_filename = os.path.join(processed_dir, 'train%s.chunk.gz' % i)
+    dataset.write(train_filename)
   
 
 def train(processed_dir, read_file=None, save_file=None, epochs=10, logdir=None, checkpoint_freq=10000):
