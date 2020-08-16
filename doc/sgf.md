@@ -1,5 +1,27 @@
 # Smart Game Format
 
+## 1. SGF Basics
+SGF is a text only format. It contains game tree, with all their nodes and properties, and nothing more. Example:
+```
+(;FF[4]C[root](;C[a];C[b](;C[c])
+(;C[d];C[e]))
+(;C[f](;C[g];C[h];C[i])
+(;C[j])))
+```
+
+## 2. Basic (EBNF) Definition
+```
+Collection = GameTree { GameTree }
+GameTree   = "(" Sequence { GameTree } ")"
+Sequence   = Node { Node }
+Node       = ";" { Property }
+Property   = PropIdent PropValue { PropValue }
+PropIdent  = UcLetter { UcLetter }
+PropValue  = "[" CValueType "]"
+CValueType = (ValueType | Compose)
+ValueType  = (None | Number | Real | Double | Color | SimpleText |
+		Text | Point  | Move | Stone)
+```
 
 SGF files are comprised of pairs of properties and property values, each of which describes a feature of the game. A partial list appears below. Full information can be found using the references in the Links section below.
 * **FF**: File format: version of SGF specification governing this SGF file.
