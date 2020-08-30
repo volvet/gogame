@@ -11,6 +11,7 @@ import itertools
 import struct
 import gzip
 import numpy as np
+import tqdm
 
 import go
 import utils

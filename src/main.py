@@ -16,6 +16,8 @@ import argh
 import gtp as gtp_lib
 from load_data_sets import parse_data_sets, DataSet
 
+TRAINING_CHUNK_RE = re.compile(r'train\d+\.chunk.gz')
+
 
 def gtp(strategy, read_file=None):
   pass
@@ -42,7 +44,16 @@ def preprocess(*data_sets, processed_dir='processed_data'):
   
 
 def train(processed_dir, read_file=None, save_file=None, epochs=10, logdir=None, checkpoint_freq=10000):
-  pass
+  test_dataset = DataSet.read(os.path.join(processed_dir, 'test.chunk.gz'))
+  #print(test_dataset)
+  train_chunk_files = [os.path.join(processed_dir, fname)
+                       for fname in os.listdir(processed_dir) if TRAINING_CHUNK_RE.match(fname)]
+  print(train_chunk_files)
+  if read_fine is not None:
+    read_file = os.path.join(os.getcwd(), save_file)
+
+
+
 
 if __name__== '__main__':
   parser = argparse.ArgumentParser()
