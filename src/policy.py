@@ -97,8 +97,26 @@ class PolicyNetwork(object):
         setattr(self, name, thing)
         
     #print(locals())
-    
 
+  def initialize_logging(self, tensorboard_logdir):
+    self.test_summary_writer = tf.summary.FileWriter(os.path.join(tensorboard_logdir, 'test'), self.session.graph)
+    self.training_summary_writer = tf.summary.FileWriter(os.path.join(tensorboard_logdir, 'training'), self.session.graph)
+
+  def initialize_variables(self, save_file=None):
+    self.session.run(tf.global_variables_initializer())
+    if save_file is not None:
+      self.saver.restore(self.session, save_file)
+
+  def get_global_step(self):
+    return self.session.run(self.global_step)
+
+  def save_variables(self, save_file):
+    if save_file is not None:
+      print('Saving checkpoint to %s' % save_file, file=sys.stderr)
+      self.saver.save(self.session, save_file)
+
+  def train(self, training_data, batch_size=32):
+    num_minibatches = training_data.data_size // batch_size
 
 class StatisticsCollector(object):
   graph = tf.Graph()
