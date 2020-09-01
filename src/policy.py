@@ -117,6 +117,11 @@ class PolicyNetwork(object):
 
   def train(self, training_data, batch_size=32):
     num_minibatches = training_data.data_size // batch_size
+    for i in range(num_minibatches):
+      batch_x, batch_y = training_data.get_batch(batch_size)
+      _, accuracy, cost = self.session.run([self.train_step, self.accuracy, self.log_likelihood_cost],
+                                           feed_dict={self.x: batch_x, self.y: batch_y})
+      self.training_stats.report(accuracy, cost)
 
 class StatisticsCollector(object):
   graph = tf.Graph()
