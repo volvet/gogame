@@ -25,7 +25,7 @@ def timer(message):
   tick = time.time()
   yield
   tock = time.time()
-  print('%s, %0.3f' % (message, (tock-tick)))
+  #print('%s, %0.3f' % (message, (tock-tick)))
 
 
 def gtp(strategy, read_file=None):
@@ -68,18 +68,20 @@ def train(processed_dir, read_file=None, save_file=None, epochs=10, logdir=None,
   last_save_checkpoint = 0
   for i in range(epochs):
     random.shuffle(train_chunk_files)
-    for file in train_chunk_files:
-      print('Using %s' % file)
+    for file in tqdm.tqdm(train_chunk_files, desc='epochs ' + str(i)):
+      #print('Using %s' % file)
       with timer('load dataset'):
         train_dataset = DataSet.read(file)
       with timer('training'):
         n.train(train_dataset)
-      with timer('save model'):
-        n.save_variables(save_file)
       if n.get_global_step() > last_save_checkpoint + checkpoint_freq:
+        with timer('save model'):
+          n.save_variables(save_file)
         with timer('test set evaluation'):
           n.check_accuracy(test_dataset)
         last_save_checkpoint = n.get_global_step()
+    with timer('test set evaluation'):
+      n.check_accuracy(test_dataset)
 
 
 if __name__== '__main__':

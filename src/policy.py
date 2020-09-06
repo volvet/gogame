@@ -172,7 +172,7 @@ class StatisticsCollector(object):
     
   def report(self, accuracy, cost):
     self.accuracies.append(accuracy)
-    self.costs.append(accuracy)
+    self.costs.append(cost)
     
   def collect(self):
     avg_acc = sum(self.accuracies) / len(self.accuracies)
