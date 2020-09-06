@@ -14,9 +14,18 @@ import tqdm
 import argparse
 import argh
 import gtp as gtp_lib
+from contextlib import contextmanager
 from load_data_sets import parse_data_sets, DataSet
+from policy import PolicyNetwork
 
 TRAINING_CHUNK_RE = re.compile(r'train\d+\.chunk.gz')
+
+@contextmanager
+def timer(message):
+  tick = time.time()
+  yield
+  tock = time.time()
+  print('%s, %0.3f' % (message, (tock-tick)))
 
 
 def gtp(strategy, read_file=None):
@@ -49,10 +58,28 @@ def train(processed_dir, read_file=None, save_file=None, epochs=10, logdir=None,
   train_chunk_files = [os.path.join(processed_dir, fname)
                        for fname in os.listdir(processed_dir) if TRAINING_CHUNK_RE.match(fname)]
   print(train_chunk_files)
-  if read_fine is not None:
+  if read_file is not None:
     read_file = os.path.join(os.getcwd(), save_file)
-
-
+  n = PolicyNetwork()
+  n.initialize_variables()
+  if logdir is not None:
+    n.initialize_logging(logdir)
+    
+  last_save_checkpoint = 0
+  for i in range(epochs):
+    random.shuffle(train_chunk_files)
+    for file in train_chunk_files:
+      print('Using %s' % file)
+      with timer('load dataset'):
+        train_dataset = DataSet.read(file)
+      with timer('training'):
+        n.train(train_dataset)
+      with timer('save model'):
+        n.save_variables(save_file)
+      if n.get_global_step() > last_save_checkpoint + checkpoint_freq:
+        with timer('test set evaluation'):
+          n.check_accuracy(test_dataset)
+        last_save_checkpoint = n.get_global_step()
 
 
 if __name__== '__main__':

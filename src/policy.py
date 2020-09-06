@@ -83,7 +83,7 @@ class PolicyNetwork(object):
     was_correct = tf.equal(tf.argmax(logits, 1), tf.argmax(y, 1))
     accuracy = tf.reduce_mean(tf.cast(was_correct, tf.float32))
     
-    weight_summeries = tf.compat.v1.summary.merge([tf.compat.v1.summary.histogram(weight_var.name, weight_var)
+    weight_summaries = tf.compat.v1.summary.merge([tf.compat.v1.summary.histogram(weight_var.name, weight_var)
                                         for weight_var in [W_conv_init] + W_conv_intermediate + [W_conv_final, b_conv_final]],
                                         name='weight_summaries')
     
@@ -103,7 +103,7 @@ class PolicyNetwork(object):
     self.training_summary_writer = tf.summary.FileWriter(os.path.join(tensorboard_logdir, 'training'), self.session.graph)
 
   def initialize_variables(self, save_file=None):
-    self.session.run(tf.global_variables_initializer())
+    self.session.run(tf.compat.v1.initialize_all_variables())
     if save_file is not None:
       self.saver.restore(self.session, save_file)
 
@@ -122,7 +122,39 @@ class PolicyNetwork(object):
       _, accuracy, cost = self.session.run([self.train_step, self.accuracy, self.log_likelihood_cost],
                                            feed_dict={self.x: batch_x, self.y: batch_y})
       self.training_stats.report(accuracy, cost)
+      
+    avg_accuracy, avg_cost, accuracy_summaries = self.training_stats.collect()
+    global_step = self.get_global_step()
+    print("Step %d training data accuracy: %g; cost: %g" % (global_step, avg_accuracy, avg_cost))
+    if self.training_summary_writer is not None:
+      activation_summaries = self.session.run(
+                self.activation_summaries,
+                feed_dict={self.x: batch_x, self.y: batch_y})
+      self.training_summary_writer.add_summary(activation_summaries, global_step)
+      self.training_summary_writer.add_summary(accuracy_summaries, global_step)
 
+  def run(self, position):
+    processed_position = features.extract_features(position, features=self.features)
+    probabilities = self.session.run(self.output, dict={self.x: processed_position[None, :]})[0]
+    return probabilities.reshape(go.N, go.N)
+    
+  def check_accuracy(self, test_data, batch_size=128):
+    num_minibatches = test_data.data_size // batch_size
+    weight_summaries = self.session.run(self.weight_summaries)
+
+    for i in range(num_minibatches):
+      batch_x, batch_y = test_data.get_batch(batch_size)
+      accuracy, cost = self.session.run([self.accuracy, self.log_likelihood_cost], feed_dict={self.x: batch_x, self.y: batch_y})
+      self.test_stats.report(accuracy, cost)
+      
+    avg_accuracy, avg_cost, accuracy_summaries = self.test_stats.collect()
+    global_step = self.get_global_step()
+    print('Step %s test data accuracy: %g; cost %g' % (global_step, avg_accuracy, avg_cost))
+    
+    if self.test_summary_writer is not None:
+      self.test_summary_writer.add_summary(weight_summaries, global_step)
+      self.test_summary_writer.add_summary(accuracy_summaries, global_step)
+    
 class StatisticsCollector(object):
   graph = tf.Graph()
   with tf.device('/cpu:0'), graph.as_default():
@@ -140,7 +172,7 @@ class StatisticsCollector(object):
     
   def report(self, accuracy, cost):
     self.accuracies.append(accuracy)
-    self.cost.append(accuracy)
+    self.costs.append(accuracy)
     
   def collect(self):
     avg_acc = sum(self.accuracies) / len(self.accuracies)

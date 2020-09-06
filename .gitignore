@@ -5,4 +5,5 @@ __pycache__
 *.tar.gz
 src/data
 src/processed_data
+src/model
 *.txt
