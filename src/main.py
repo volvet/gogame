@@ -17,6 +17,7 @@ import gtp as gtp_lib
 from contextlib import contextmanager
 from load_data_sets import parse_data_sets, DataSet
 from policy import PolicyNetwork
+from strategies import MCTS
 
 TRAINING_CHUNK_RE = re.compile(r'train\d+\.chunk.gz')
 
@@ -29,7 +30,20 @@ def timer(message):
 
 
 def gtp(strategy, read_file=None):
-  pass
+  network = PolicyNetwork()
+  instance = MCTS(network, read_file)
+  gtp_engine = gtp_lib.Engine(instance)
+  print('gtp engine ready')
+  while not gtp_engine.disconnect:
+    inpt = input()
+    try:
+      cmd_list = inpt.split('\n')
+    except:
+      cmd_list = [inpt]
+    for cmd in cmd_list:
+      print('sending cmd %s' % cmd)
+      engine_reply = gtp_engine.send(cmd)
+      print(engine_reply)
 
 def preprocess(*data_sets, processed_dir='processed_data'):
   processed_dir = os.path.join(os.getcwd(), processed_dir)
