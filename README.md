@@ -6,6 +6,7 @@ Learn go game from reference
 * [Smart Game Format](doc/sgf.md)
 * [MCTS](doc/mcts.md)
 * [Training with Effeciently Gradients](doc/training.md)
+* [Depthwise Seperate Convolution](doc/dsc.md)
 
 
 ## Reference
