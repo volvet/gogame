@@ -11,3 +11,5 @@ Just Run below command
 note the $(brew --prefix)/* ...High Sierra doesn't allow you to change permissions on /user/local directly)
 
 Your problem will solved 100%.
+
+Reference: https://github.com/httpie/httpie/issues/645
